@@ -1,7 +1,10 @@
+using ContactApp.API.Data;
+using ContactApp.API.Model;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -28,6 +31,14 @@ namespace ContactApp.API
         {
 
             services.AddControllers();
+            services.AddDbContext<ContactDbContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("SqlServer"), sqlOptions =>
+                {
+                    sqlOptions.MigrationsAssembly("ContactApp.API");
+                });
+            });
+            services.Configure<CustomConnectionStringOptions>(Configuration.GetSection("ConnectionStrings"));
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ContactApp.API", Version = "v1" });
