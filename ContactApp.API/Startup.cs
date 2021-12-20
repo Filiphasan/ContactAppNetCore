@@ -1,4 +1,5 @@
 using ContactApp.API.Data;
+using ContactApp.API.Helpers.CustomExtensions;
 using ContactApp.API.Model;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -29,8 +30,7 @@ namespace ContactApp.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
-            services.AddControllers();
+            services.MyCustomLifeCycles();
             services.AddDbContext<ContactDbContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("SqlServer"), sqlOptions =>
@@ -39,6 +39,7 @@ namespace ContactApp.API
                 });
             });
             services.Configure<CustomConnectionStringOptions>(Configuration.GetSection("ConnectionStrings"));
+            services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ContactApp.API", Version = "v1" });
