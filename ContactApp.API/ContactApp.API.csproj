@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <Folder Include="Controllers\" />
+    <Folder Include="Data\Configurations\" />
     <Folder Include="Services\" />
   </ItemGroup>
 
