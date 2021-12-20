@@ -18,7 +18,6 @@ namespace ContactApp.API.Data.Configurations
             builder.Property(ci => ci.Value).IsRequired();
             builder.Property(ci => ci.Value).HasMaxLength(200);
             builder.Property(ci => ci.IsDeleted).HasDefaultValue(false);
-            builder.Property(ci => ci.CreatedAt).HasDefaultValue(DateTime.UtcNow);
             builder.HasOne<Contact>(ci => ci.Contact).WithMany(ci => ci.ContactInfos).HasForeignKey(ci => ci.ContactId).OnDelete(DeleteBehavior.Cascade);
             builder.HasIndex(ci => new { ci.ContactId, ci.Key }).IsUnique();
         }
