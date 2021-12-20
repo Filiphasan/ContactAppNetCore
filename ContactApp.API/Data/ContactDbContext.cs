@@ -1,4 +1,5 @@
-﻿using ContactApp.API.Data.Model;
+﻿using ContactApp.API.Data.Configurations;
+using ContactApp.API.Data.Model;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,8 @@ namespace ContactApp.API.Data
         public DbSet<ContactInfo> ContactInfos { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.ApplyConfiguration(new ContactConfiguration());
+            modelBuilder.ApplyConfiguration(new ContactInfoConfiguration());
             base.OnModelCreating(modelBuilder);
         }
     }
