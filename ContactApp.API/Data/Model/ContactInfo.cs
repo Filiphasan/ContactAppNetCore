@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ContactApp.API.Data.Model
 {
-    public class ContactInfo
+    public class ContactInfo : BaseModel
     {
         public int Id { get; set; }
         /// <summary>
