@@ -111,6 +111,7 @@ namespace ContactApp.API.Data.Repositories
         public TEntity Update(TEntity entity)
         {
             var data = _dbSet.Update(entity);
+            _context.SaveChanges();
             return data.Entity;
         }
 
