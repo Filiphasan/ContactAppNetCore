@@ -21,7 +21,6 @@ namespace ContactApp.API.Helpers.CustomExtensions
             }
             else
             {
-                // format like: option1, option2 or option3
                 formatted = $"{string.Join(", ", validOptions.Select(vo => vo.ToString()).ToArray(), 0, validOptions.Length - 1)} or {validOptions.Last()}";
             }
 

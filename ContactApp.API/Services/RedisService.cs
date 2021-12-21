@@ -15,7 +15,7 @@ namespace ContactApp.API.Services
     public class RedisService : IRedisService
     {
         private IDatabase _database;
-        private RedisCacheOptions _redisCacheOptions;
+        private readonly RedisCacheOptions _redisCacheOptions;
         private readonly CustomConnectionStringOptions _connectionStringOptions;
         private static ConnectionMultiplexer _connectionMultiplexer;
 
@@ -27,6 +27,7 @@ namespace ContactApp.API.Services
                 Configuration = _connectionStringOptions.Redis
             };
             _connectionMultiplexer = ConnectionMultiplexer.Connect(_connectionStringOptions.Redis);
+            _database = _connectionMultiplexer.GetDatabase();
         }
 
         public async Task<bool> Clear()
