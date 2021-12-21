@@ -19,7 +19,7 @@ namespace ContactApp.API.Data.Configurations
             builder.Property(ci => ci.Value).HasMaxLength(200);
             builder.Property(ci => ci.IsDeleted).HasDefaultValue(false);
             builder.HasOne<Contact>(ci => ci.Contact).WithMany(ci => ci.ContactInfos).HasForeignKey(ci => ci.ContactId).OnDelete(DeleteBehavior.Cascade);
-            //builder.HasIndex(ci => new { ci.ContactId, ci.Key }).IsUnique();
+            //builder.HasIndex(ci => new { ci.ContactId, ci.Key }).IsUnique(); // This feature for one user has one key type.
         }
     }
 }
