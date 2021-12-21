@@ -17,6 +17,7 @@ namespace ContactApp.API.Helpers.CustomExtensions
             services.AddScoped<IContactRepository, ContactRepository>();
             services.AddScoped<IContactInfoRepository, ContactInfoRepository>();
             services.AddScoped<IContactService, ContactService>();
+            services.AddScoped<IContactInfoService, ContactInfoService>();
             services.AddSingleton<IRedisService, RedisService>();
             return services;
         }
