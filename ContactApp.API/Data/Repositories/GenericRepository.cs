@@ -36,6 +36,18 @@ namespace ContactApp.API.Data.Repositories
             _context.SaveChanges();
         }
 
+        public IEnumerable<TEntity> GetAll()
+        {
+            var entities = _dbSet.ToList();
+            return entities;
+        }
+
+        public async Task<IEnumerable<TEntity>> GetAllAsync()
+        {
+            var entities = await _dbSet.ToListAsync();
+            return entities;
+        }
+
         public TEntity GetById(object id)
         {
             var entity = _dbSet.Find(id);

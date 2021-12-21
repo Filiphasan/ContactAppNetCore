@@ -10,6 +10,8 @@ namespace ContactApp.API.Interfaces
     {
         Task<TEntity> GetByIdAsync(object id);
         TEntity GetById(object id);
+        Task<IEnumerable<TEntity>> GetAllAsync();
+        IEnumerable<TEntity> GetAll();
         IQueryable<TEntity> Where(Expression<Func<TEntity, bool>> predicate);
         IQueryable<TEntity> JoinWhere(Expression<Func<TEntity, bool>> predicate, params Expression<Func<TEntity,object>>[] includes);
         Task<TEntity> InsertAsyncReturn(TEntity entity);

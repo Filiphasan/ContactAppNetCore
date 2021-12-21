@@ -1,4 +1,5 @@
 using ContactApp.API.Data;
+using ContactApp.API.Helpers;
 using ContactApp.API.Helpers.CustomExtensions;
 using ContactApp.API.Model;
 using Microsoft.AspNetCore.Builder;
@@ -39,6 +40,8 @@ namespace ContactApp.API
                 });
             });
             services.Configure<CustomConnectionStringOptions>(Configuration.GetSection("ConnectionStrings"));
+            services.Configure<ContactCacheKeys>(Configuration.GetSection("ContactCacheKeys"));
+            services.Configure<ContactCacheStringHelpers>(Configuration.GetSection("ContactCacheStringHelpers"));
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

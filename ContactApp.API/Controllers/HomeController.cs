@@ -30,8 +30,13 @@ namespace ContactApp.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Add()
         {
-            _redisService.Set<string>("deneme", "deneme datası");
-            return Ok();
+            var data = await _contactService.AddAsync(new Model.ContactAddModel
+            {
+                FirstName="Deneme",
+                LastName = "Deneme",
+                Firm = "Deneme"
+            });
+            return Ok(data);
         }
     }
 }
