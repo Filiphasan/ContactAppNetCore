@@ -20,11 +20,11 @@ namespace ContactApp.API.Controllers
             _contactInfoService = contactInfoService;
         }
 
-        [HttpGet("{userId}")]
+        [HttpGet("user/{id}")]
         [ProducesResponseType(typeof(IEnumerable<ContactInfoGetModel>), 200)]
-        public async Task<IActionResult> GetUserInfos(string userId)
+        public async Task<IActionResult> GetUserInfos(string id)
         {
-            var datas = await _contactInfoService.GetUserContactInfoAsync(userId);
+            var datas = await _contactInfoService.GetUserContactInfoAsync(id);
             return Ok(datas);
         }
         [HttpGet("{id}")]

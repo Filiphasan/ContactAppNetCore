@@ -9,7 +9,7 @@ namespace ContactApp.API.Data.Model
     {
         public int Id { get; set; }
         /// <summary>
-        /// Information Type One Of "Telefon Numarası, E-Mail Adresi, Konum"
+        /// Information Type, One Of "Telefon Numarası, E-Mail Adresi, Konum"
         /// </summary>
         public string Key { get; set; }
         /// <summary>
