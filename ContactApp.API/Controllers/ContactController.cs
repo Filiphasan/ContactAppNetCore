@@ -45,7 +45,7 @@ namespace ContactApp.API.Controllers
         [ProducesResponseType(typeof(string),200)]
         public async Task<IActionResult> Delete(string id)
         {
-            var data = await _contactService.DeleteAsync(id);
+            var data = await _contactService.SoftDeleteAsync(id);
             if (data)
             {
                 return Ok("Success.");

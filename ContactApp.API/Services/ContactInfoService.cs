@@ -134,9 +134,29 @@ namespace ContactApp.API.Services
             throw new NotImplementedException();
         }
 
-        public Task<ContactInfoGetModel> GetByIdAsync(int id)
+        public async Task<ContactInfoGetModel> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var data = _redisService.Get<ContactInfoGetModel>(string.Format(_contactInfoCacheKeys.OneContactInfo, id));
+                if (data != null) return data;
+                var entity = await _contactInfoRepository.GetByIdAsync(id);
+                var contactInfoGetModel = new ContactInfoGetModel
+                {
+                    Id = entity.Id,
+                    Key = entity.Key,
+                    Value = entity.Value,
+                    ContactId = entity.ContactId
+                };
+                #region Redis Cache
+                _redisService.Set<ContactInfoGetModel>(string.Format(_contactInfoCacheKeys.OneContactInfo, id), contactInfoGetModel);
+                #endregion
+                return contactInfoGetModel;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async Task<IEnumerable<ContactInfoGetModel>> GetUserContactInfoAsync(string userId)
