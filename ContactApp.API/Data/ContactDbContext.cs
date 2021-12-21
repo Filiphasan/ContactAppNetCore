@@ -1,5 +1,6 @@
 ﻿using ContactApp.API.Data.Configurations;
 using ContactApp.API.Data.Model;
+using ContactApp.API.Data.Seeds;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,8 @@ namespace ContactApp.API.Data
         {
             modelBuilder.ApplyConfiguration(new ContactConfiguration());
             modelBuilder.ApplyConfiguration(new ContactInfoConfiguration());
+            modelBuilder.ApplyConfiguration(new ContactSeeds());
+            modelBuilder.ApplyConfiguration(new ContactInfoSeeds());
             base.OnModelCreating(modelBuilder);
         }
     }
