@@ -43,6 +43,7 @@ namespace ContactApp.API
             services.Configure<CustomConnectionStringOptions>(Configuration.GetSection("ConnectionStrings"));
             services.Configure<ContactCacheKeys>(Configuration.GetSection("ContactCacheKeys"));
             services.Configure<ContactCacheStringHelpers>(Configuration.GetSection("ContactCacheStringHelpers"));
+            services.Configure<ContactInfoCacheKeys>(Configuration.GetSection("ContactInfoCacheKeys"));
             services.AddControllers().AddFluentValidation(options =>
             {
                 options.RegisterValidatorsFromAssemblyContaining<Startup>(null,ServiceLifetime.Singleton);

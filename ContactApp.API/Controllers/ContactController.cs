@@ -42,6 +42,7 @@ namespace ContactApp.API.Controllers
             return Ok(data);
         }
         [HttpDelete("{id}")]
+        [ProducesResponseType(typeof(string),200)]
         public async Task<IActionResult> Delete(string id)
         {
             var data = await _contactService.DeleteAsync(id);
