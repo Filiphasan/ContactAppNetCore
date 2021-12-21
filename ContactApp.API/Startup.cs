@@ -2,6 +2,7 @@ using ContactApp.API.Data;
 using ContactApp.API.Helpers;
 using ContactApp.API.Helpers.CustomExtensions;
 using ContactApp.API.Model;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -42,7 +43,10 @@ namespace ContactApp.API
             services.Configure<CustomConnectionStringOptions>(Configuration.GetSection("ConnectionStrings"));
             services.Configure<ContactCacheKeys>(Configuration.GetSection("ContactCacheKeys"));
             services.Configure<ContactCacheStringHelpers>(Configuration.GetSection("ContactCacheStringHelpers"));
-            services.AddControllers();
+            services.AddControllers().AddFluentValidation(options =>
+            {
+                options.RegisterValidatorsFromAssemblyContaining<Startup>(null,ServiceLifetime.Singleton);
+            });
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ContactApp.API", Version = "v1" });
