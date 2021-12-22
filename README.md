@@ -52,6 +52,9 @@ Entity Framework Core .NET Command-line Tools 2.1.3-rtm-32065
 15. Her şey tamam ise ContactApp.API dizininde açtığımız terminalde `dotnet ef database update` komutunu çalıştırarak veri tabanını oluşturuyoruz.
 16. Eğer projeyi VS Code ile açtıysak `dotnet build` komutunu terminalde çalıştırmalıyız. Gerekli paketler yüklenecektir.
 17. Veri tabanı oluşturduk. Projeyi Visual Studio kullanarak çalıştırmak için ContactApp.API seçili olarak Debug modda IIS Express butonu ile çalıştırıyoruz.
+> Postman API Testi için json dosyası [indir](https://drive.google.com/file/d/1sn28g6SBuPW6USMdKkIWseoqu3bh3YjI/view?usp=sharing)
+18. Her şey doğru gittiyse aşağıdaki ekranı görmeliyiz.
+![alt](https://i.ibb.co/dD005fV/Ekran-g-r-nt-s-2021-12-22-215905.png)
 
 # Rise Consulting Contact Application [EN]"
 This project is a web service that will be used by web or mobile applications. The following technologies and tools were used while coding.
@@ -106,4 +109,6 @@ Entity Framework Core .NET Command-line Tools 2.1.3-rtm-32065
 15. If everything is ok, we create the database by running the `dotnet ef database update` command in the terminal we opened in the ContactApp.API directory.
 16. f we opened the project with VS Code, we should run the `dotnet build ` command in the terminal. Required packages will be installed.
 17. We created a database. To run the project using Visual Studio, we run it in Debug mode with the IIS Express button with ContactApp.API selected.
+> Json file for Postman API Test [Download](https://drive.google.com/file/d/1sn28g6SBuPW6USMdKkIWseoqu3bh3YjI/view?usp=sharing)
 18. And we see that screen.
+![alt](https://i.ibb.co/dD005fV/Ekran-g-r-nt-s-2021-12-22-215905.png)
