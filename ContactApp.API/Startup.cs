@@ -51,6 +51,11 @@ namespace ContactApp.API
             {
                 options.RegisterValidatorsFromAssemblyContaining<Startup>(null, ServiceLifetime.Singleton);
             });
+            //services.AddCors(options =>
+            //{
+            //    options.AddPolicy("AllowOrigin", builder => builder.WithOrigins("domain"));
+            //});
+            services.AddCors(options => { options.AddPolicy("AllowOrigin", policy => policy.AllowAnyOrigin()); });
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ContactApp.API", Version = "v1" });
@@ -70,6 +75,15 @@ namespace ContactApp.API
             {
                 app.UseCustomException();
             }
+
+            //app.UseCors(builder => builder.WithOrigins("domain").AllowAnyHeader());
+
+            app.UseCors
+            (
+                builder => builder.AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+            );
 
             app.UseHttpsRedirection();
 
