@@ -24,8 +24,4 @@
     <ProjectReference Include="..\ContactApp.API\ContactApp.API.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Data\Repositories\" />
-  </ItemGroup>
-
 </Project>
