@@ -255,7 +255,7 @@ namespace ContactApp.API.Services
         {
             try
             {
-                var data = _redisService.Get<ContactGetModel>(string.Format(_contactCacheKeys.OneContact + "with-infos", id));
+                var data = _redisService.Get<ContactGetModel>(string.Format(_contactCacheKeys.OneContact + "-with-infos", id));
                 if (data != null) return data;
                 var entity = await _contactRepository.GetByIdAsync(id);
                 if (entity == null) throw new Exception("Not Found!");
@@ -274,7 +274,7 @@ namespace ContactApp.API.Services
                 }
                 contactGetModel.ContactInfos = list;
                 #region Redis Cache
-                _redisService.Set<ContactGetModel>(string.Format(_contactCacheKeys.OneContact + "with-infos", entity.Id), contactGetModel);
+                _redisService.Set<ContactGetModel>(string.Format(_contactCacheKeys.OneContact + "-with-infos", entity.Id), contactGetModel);
                 #endregion
                 return contactGetModel;
             }
