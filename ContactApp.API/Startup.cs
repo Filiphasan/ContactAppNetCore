@@ -66,6 +66,10 @@ namespace ContactApp.API
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ContactApp.API v1"));
             }
+            else
+            {
+                app.UseCustomException();
+            }
 
             app.UseHttpsRedirection();
 
