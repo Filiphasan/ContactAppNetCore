@@ -77,3 +77,33 @@ This project is a web service that will be used by web or mobile applications. T
 - [ ] Visual Studio 2019 Community Edition [Download](https://visualstudio.microsoft.com/tr/downloads/)
 
 **If the above items are OK, the following steps should be followed to run the project.**
+1. Open Powershell or Terminal Screen.
+2. Since Docker is installed, we run the code below and get the Redis container up.
+3. Code `docker run -p 6380:6379 --name some-redis -d redis`
+4. We are running a latest version of Redis container via Docker. This code downloads the redis image file if it is not available on the computer. The Redis container we run uses port 6379 by default. With the code above, we open a Redis container from port 6380.
+5. We will use git cli to download the project on own computer. After opening a terminal screen, we run the following code.
+6. `cd your_local_project_direct`
+7. With this code, we move to the file directory where we want to download the project. By running the code below on the terminal screen, we download the project.
+8. `git clone https://github.com/Filiphasan/RiseConsulting_ContactApp.git`
+9. Double-click the ContactApp.sln file to open the downloaded project with Visual Studio. If we want to use an editor like VS Code, we open a terminal in the project directory and run the `code .`
+10. When we open it with Visual Studio, the necessary dll for the Visual Studio project etc. It downloads files automatically. To be sure, you can right-click the ContactApp.sln file on the Solution Explorer screen and select Clean Solution and then Rebuil Solution.
+11. Since the migration structure is installed in the project, SQL Server is needed to create the database. We will create the database using the .Net CLI.
+12. For this we have to go to the ContactApp.API directory. In this directory, we need to open a terminal screen and enter the following code.
+13. If we do not get an output similar to the one below with the `dotnet ef` code, the dotnet ef tool is not installed. You need to enter this code to install. `dotnet tool install --global dotnet-ef`
+```
+_/\__
+               ---==/    \\
+         ___  ___   |.    \|\
+        | __|| __|  |  )   \\\
+        | _| | _|   \_/ |  //|\\
+        |___||_|       /   \\\/\\
+
+Entity Framework Core .NET Command-line Tools 2.1.3-rtm-32065
+
+<Usage documentation follows, not shown.>
+```
+14. If we have a similar output, you should change the SqlServer connection address under ConnectionStrings in the `appsetting.json` file in the ContactApp.API directory in the project to suit your own computer.
+15. If everything is ok, we create the database by running the `dotnet ef database update` command in the terminal we opened in the ContactApp.API directory.
+16. f we opened the project with VS Code, we should run the `dotnet build ` command in the terminal. Required packages will be installed.
+17. We created a database. To run the project using Visual Studio, we run it in Debug mode with the IIS Express button with ContactApp.API selected.
+18. And we see that screen.
