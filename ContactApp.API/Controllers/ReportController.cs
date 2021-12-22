@@ -23,8 +23,8 @@ namespace ContactApp.API.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            await _reportService.GetBasicReportAsync();
-            return Ok();
+            var data = await _reportService.GetBasicReportAsync();
+            return Ok(data);
         }
     }
 }

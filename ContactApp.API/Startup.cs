@@ -44,9 +44,12 @@ namespace ContactApp.API
             services.Configure<ContactCacheKeys>(Configuration.GetSection("ContactCacheKeys"));
             services.Configure<ContactCacheStringHelpers>(Configuration.GetSection("ContactCacheStringHelpers"));
             services.Configure<ContactInfoCacheKeys>(Configuration.GetSection("ContactInfoCacheKeys"));
-            services.AddControllers().AddFluentValidation(options =>
+            services.AddControllers(options =>
             {
-                options.RegisterValidatorsFromAssemblyContaining<Startup>(null,ServiceLifetime.Singleton);
+                options.ReturnHttpNotAcceptable = true;
+            }).AddFluentValidation(options =>
+            {
+                options.RegisterValidatorsFromAssemblyContaining<Startup>(null, ServiceLifetime.Singleton);
             });
             services.AddSwaggerGen(c =>
             {
