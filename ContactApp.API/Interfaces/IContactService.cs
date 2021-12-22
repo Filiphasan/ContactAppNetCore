@@ -9,6 +9,7 @@ namespace ContactApp.API.Interfaces
     public interface IContactService
     {
         Task<ContactGetModel> GetByIdAsync(string id);
+        Task<ContactGetModel> GetByIdWithInfosAsync(string id);
         Task<IEnumerable<ContactGetModel>> GetAllAsync();
         Task<IEnumerable<ContactGetModel>> GetAllNonDeleteAsync();
         Task<ContactGetModel> AddAsync(ContactAddModel model);

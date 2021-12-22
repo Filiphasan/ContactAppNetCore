@@ -26,6 +26,13 @@ namespace ContactApp.API.Controllers
             var data = await _contactService.GetAllNonDeleteAsync();
             return Ok(data);
         }
+        [HttpGet("{id}/info")]
+        [ProducesResponseType(typeof(ContactGetModel), 200)]
+        public async Task<IActionResult> GetWithInfo(string id)
+        {
+            var data = await _contactService.GetByIdWithInfosAsync(id);
+            return Ok(data);
+        }
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(ContactGetModel), 200)]
         public async Task<IActionResult> Get(string id)

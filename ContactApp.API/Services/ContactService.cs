@@ -15,13 +15,15 @@ namespace ContactApp.API.Services
     public class ContactService : IContactService
     {
         private readonly IContactRepository _contactRepository;
+        private readonly IContactInfoRepository _contactInfoRepository;
         private readonly IRedisService _redisService;
         private readonly ContactCacheKeys _contactCacheKeys;
         private readonly ContactCacheStringHelpers _contactCacheStringHelpers;
 
-        public ContactService(IContactRepository contactRepository, IRedisService redisService, IOptions<ContactCacheKeys> contactCacheKeysOptions, IOptions<ContactCacheStringHelpers> contactCacheStrHelperOptions)
+        public ContactService(IContactRepository contactRepository, IContactInfoRepository contactInfoRepository, IRedisService redisService, IOptions<ContactCacheKeys> contactCacheKeysOptions, IOptions<ContactCacheStringHelpers> contactCacheStrHelperOptions)
         {
             _contactRepository = contactRepository;
+            _contactInfoRepository = contactInfoRepository;
             _redisService = redisService;
             _contactCacheKeys = contactCacheKeysOptions.Value;
             _contactCacheStringHelpers = contactCacheStrHelperOptions.Value;
@@ -230,6 +232,7 @@ namespace ContactApp.API.Services
                 var data = _redisService.Get<ContactGetModel>(string.Format(_contactCacheKeys.OneContact, id));
                 if (data != null) return data;
                 var entity = await _contactRepository.GetByIdAsync(id);
+                if (entity == null) throw new Exception("Not Found!");
                 var contactGetModel = new ContactGetModel
                 {
                     Id = entity.Id,
@@ -239,6 +242,39 @@ namespace ContactApp.API.Services
                 };
                 #region Redis Cache
                 _redisService.Set<ContactGetModel>(string.Format(_contactCacheKeys.OneContact, entity.Id), contactGetModel);
+                #endregion
+                return contactGetModel;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task<ContactGetModel> GetByIdWithInfosAsync(string id)
+        {
+            try
+            {
+                var data = _redisService.Get<ContactGetModel>(string.Format(_contactCacheKeys.OneContact + "with-infos", id));
+                if (data != null) return data;
+                var entity = await _contactRepository.GetByIdAsync(id);
+                if (entity == null) throw new Exception("Not Found!");
+                var infos = await _contactInfoRepository.Where(x => x.ContactId == entity.Id).ToListAsync();
+                var contactGetModel = new ContactGetModel
+                {
+                    Id = entity.Id,
+                    FirstName = entity.FirstName,
+                    LastName = entity.LastName,
+                    Firm = entity.Firm
+                };
+                var list = new List<ContactInfoGetModel>();
+                foreach (var item in infos)
+                {
+                    list.Add(new ContactInfoGetModel { Id= item.Id, Key = item.Key, Value = item.Value, ContactId = item.ContactId});
+                }
+                contactGetModel.ContactInfos = list;
+                #region Redis Cache
+                _redisService.Set<ContactGetModel>(string.Format(_contactCacheKeys.OneContact + "with-infos", entity.Id), contactGetModel);
                 #endregion
                 return contactGetModel;
             }
